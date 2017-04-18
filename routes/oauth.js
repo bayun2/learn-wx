@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/callback', function(req, res, next) {
+  console.log('~~~~')
   var code = req.query.code;
   console.log(code);
   client.getAccessToken(code, function(err, result) {
