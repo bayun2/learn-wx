@@ -12,12 +12,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/callback', function(req, res, next) {
-  if (req.session.openid) {
-    var openid = req.session.openid;
-    client.getUser(openid, function(err, result) {
-      var userInfo = result;
-      res.render('oauth', { userInfo: userInfo });
-    })
+  if (req.session.currentUser) {
+    res.render('oauth', { userInfo: req.session.currentUser });
   } else {
     console.log('~~~~')
     var code = req.query.code;
@@ -27,9 +23,9 @@ router.get('/callback', function(req, res, next) {
       console.log(result);
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
-      req.session.openid = openid;
       client.getUser(openid, function(err, result) {
         var userInfo = result;
+        req.session.currentUser = userInfo;
         res.render('oauth', { userInfo: userInfo });
       })
     })
