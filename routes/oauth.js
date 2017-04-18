@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   var auth_callback_url = domain + '/oauth/callback';
   var url = client.getAuthorizeURL(auth_callback_url, '', 'snsapi_userinfo');
   console.log(url);
-  res.redurect(url);
+  res.redirect(url);
 });
 
 router.get('/callback', function(req, res, next) {
