@@ -16,6 +16,8 @@ router.get('/callback', function(req, res, next) {
   if (req.session.currentUser) {
     res.render('oauth', { userInfo: req.session.currentUser });
   } else {
+    req.session.currentUser = '123';
+    res.render('oauth', { userInfo: '456' });
     console.log('~~~~')
     var code = req.query.code;
     console.log(code);
@@ -24,9 +26,13 @@ router.get('/callback', function(req, res, next) {
       console.log(result);
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
+      console.log('6')
       client.getUser(openid, function(err, result) {
         var userInfo = result;
+        console.log('7')
         req.session.currentUser = userInfo;
+        console.log(req.session)
+        console.log('8')
         res.render('oauth', { userInfo: userInfo });
       })
     })
