@@ -22,7 +22,7 @@ router.get('/callback', function(req, res, next) {
     var openid = result.data.openid;
     client.getUser(openid, function(err, result) {
       var userInfo = result;
-      res.json(userInfo);
+      res.render('oauth', { userInfo: userInfo });
     })
   })
 });
