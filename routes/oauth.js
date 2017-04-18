@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/callback', function(req, res, next) {
+  console.log(req.session)
   if (req.session.currentUser) {
     res.render('oauth', { userInfo: req.session.currentUser });
   } else {
