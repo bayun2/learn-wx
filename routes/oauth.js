@@ -12,8 +12,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/callback', function(req, res, next) {
-  if (req.cookie.openid) {
-    var openid = req.cookie.openid;
+  if (req.session.openid) {
+    var openid = req.session.openid;
     client.getUser(openid, function(err, result) {
       var userInfo = result;
       res.render('oauth', { userInfo: userInfo });
@@ -27,7 +27,7 @@ router.get('/callback', function(req, res, next) {
       console.log(result);
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
-      req.cookie.openid = openid;
+      req.session.openid = openid;
       client.getUser(openid, function(err, result) {
         var userInfo = result;
         res.render('oauth', { userInfo: userInfo });
