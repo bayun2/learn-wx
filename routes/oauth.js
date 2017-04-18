@@ -5,7 +5,7 @@ var client = new OAuth('wxfcd813854f6de23e', '834177ce77f63959c559c0cfeeceaaf7')
 
 router.get('/', function(req, res, next) {
   var domain = 'http://123.206.133.45';
-  var auth_callback_url = domain + '/oauth/callback';
+  var auth_callback_url = domain + '/oauth/callback/';
   var url = client.getAuthorizeURL(auth_callback_url, '', 'snsapi_userinfo');
   console.log(url);
   res.redirect(url);
