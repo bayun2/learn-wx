@@ -16,8 +16,6 @@ router.get('/callback', function(req, res, next) {
   if (req.session.currentUser) {
     res.render('oauth', { userInfo: req.session.currentUser });
   } else {
-    req.session.currentUser = '123';
-    res.render('oauth', { userInfo: '456' });
     console.log('~~~~')
     var code = req.query.code;
     console.log(code);
