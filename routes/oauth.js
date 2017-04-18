@@ -13,7 +13,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/callback', function(req, res, next) {
   var code = req.query.code;
+  console.log(code);
   client.getAccessToken(code, function(err, result) {
+    console.log(err);
     console.log(result);
     var accessToken = result.data.access_token;
     var openid = result.data.openid;
