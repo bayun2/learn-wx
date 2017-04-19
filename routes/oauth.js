@@ -3,7 +3,7 @@ var router = express.Router();
 var OAuth = require('wechat-oauth');
 var client = new OAuth('wxfcd813854f6de23e', '834177ce77f63959c559c0cfeeceaaf7');
 
-var getWxCode = function() {
+var getWxCode = function(res) {
   var domain = 'http://123.206.133.45';
   var auth_callback_url = domain + '/oauth/callback';
   var url = client.getAuthorizeURL(auth_callback_url, '', 'snsapi_userinfo');
@@ -12,7 +12,7 @@ var getWxCode = function() {
 }
 
 router.get('/', function(req, res, next) {
-  getWxCode();
+  getWxCode(res);
 });
 
 router.get('/callback', function(req, res, next) {
@@ -37,7 +37,7 @@ router.get('/callback', function(req, res, next) {
           res.render('oauth', { userInfo: userInfo });
         })
       } catch(e) {
-        getWxCode();
+        getWxCode(res);
       }
     })
   }
