@@ -37,7 +37,7 @@ router.get('/callback', function(req, res, next) {
           res.render('oauth', { userInfo: userInfo });
         })
       } catch(e) {
-        getWxCode(res);
+        
       }
     })
   }
